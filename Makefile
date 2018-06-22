@@ -1,14 +1,14 @@
-BIN             = hello
+BIN             = helloworld
 OUTPUT_DIR      = .build
 
 .PHONY: help
 .DEFAULT_GOAL := help
 
-build: clean ## Build a linux binary ready to be zipped for AWS Lambda
+build: clean ## Build linux binary for AWS Lambda
 	mkdir -p $(OUTPUT_DIR) && GOOS=linux GOARCH=amd64 go build -o $(OUTPUT_DIR)/$(BIN) .
 	cd $(OUTPUT_DIR) && zip $(BIN).zip $(BIN)
 
-clean: ## Remove Lambda build artifacts
+clean: ## Remove build artifacts
 	$(RM) $(OUTPUT_DIR)/$(BIN).zip
 	$(RM) $(OUTPUT_DIR)/$(BIN)
 
